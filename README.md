@@ -8,4 +8,5 @@ Then, download the Roulette, go through 'cd' to the project's folder and
 in the terminal, write these commands to install electron and initialize the app:
 
    --> npm install electron
+
    --> npm start
