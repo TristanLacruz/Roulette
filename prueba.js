@@ -1,3 +1,6 @@
+const fs = require("fs");
+const { ipcRenderer } = require("electron");
+
 document.addEventListener('DOMContentLoaded', () => {
     const pestanyaInicio = document.getElementById('pestanyaInicio');
     const pestanyaContenido = document.getElementById('pestanyaContenido');
@@ -11,24 +14,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let fichas = 10; // Fichas iniciales del jugador
     let numerosApuesta = []; // Arreglo para almacenar las apuestas del jugador
-
-    // Función para iniciar el juego
-    function iniciarJuego() {
-        pestanyaInicio.classList.add('hidden');
-        pestanyaContenido.classList.remove('hidden');
-        actualizarFichas();
-    }
+    actualizarFichas();
 
     // Función para salir del juego
     function salirJuego() {
-        pestanyaContenido.classList.add('hidden');
-        pestanyaInicio.classList.remove('hidden');
-        fichas = 10; // Reiniciar las fichas
-        numerosApuesta = []; // Limpiar las apuestas
+        fichas = 10; // Reinicia las fichas
+        numerosApuesta = []; // Limpia las apuestas
         botonesApuesta.forEach(boton => boton.classList.remove('botonSeleccionado'));
-        botonesApuesta.forEach(boton => boton.classList.remove('botonConImagen')); // Quitar imagen de la ficha
+        botonesApuesta.forEach(boton => boton.classList.remove('botonConImagen'));
         actualizarFichas();
+
+        //
+        ipcRenderer.send('salirJuego');
     }
+
+
 
     // Función para jugar a la ruleta
     async function jugarRuleta() {
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         actualizarFichas();
     }
 
-    function verificarApuesta(numero, numeroGanador){
+    function verificarApuesta(numero, numeroGanador) {
         let ganancias = 0;
         if (
             (numero === 'btn_1_12' && numeroGanador >= 1 && numeroGanador <= 12) ||
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             (numero === 'btn_25_36' && numeroGanador >= 25 && numeroGanador <= 36)
         ) {
             ganancias += 3; // Gana 3 fichas por acertar el rango
-        }else if (
+        } else if (
             (numero === 'btn_1_3' && [1, 4, 7, 10, 13, 16, 19, 22, 25, 28, 31, 34].includes(numeroGanador)) ||
             (numero === 'btn_2_3' && [2, 5, 8, 11, 14, 17, 20, 23, 26, 29, 32, 35].includes(numeroGanador)) ||
             (numero === 'btn_3_3' && [3, 6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36].includes(numeroGanador))
@@ -155,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Eventos de botones
-    botonEntrar.addEventListener('click', iniciarJuego);
     botonSalir.addEventListener('click', salirJuego);
     botonJugar.addEventListener('click', jugarRuleta);
 
@@ -163,9 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boton.addEventListener('click', seleccionarNumero);
     });
 
-    // Inicialización inicial
-    pestanyaInicio.classList.remove('hidden');
-    pestanyaContenido.classList.add('hidden');
+
 });
 
 async function alternarColoresBotones() {

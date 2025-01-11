@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/estilos.css">
+
+</head>
+
+<body>
+    <div id="pestanyaContenido">
+        <div class="moving-text-container">
+            <div class="moving-text" id="text-container"></div>
+        </div>
+        <br>
+        
+        <div class="todo">
+            <table class="tablero">
+                <tr>
+                    <td rowspan="3">
+                        <button class="botonApuesta green">0</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn3" class="red botonApuesta">3</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn6" class="black botonApuesta">6</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn9" class="red botonApuesta">9</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn12" class="red botonApuesta">12</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn15" class="black botonApuesta">15</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn18" class="red botonApuesta">18</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn21" class="red botonApuesta">21</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn24" class="black botonApuesta">24</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn27" class="red botonApuesta">27</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn30" class="red botonApuesta">30</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn33" class="black botonApuesta">33</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn36" class="red botonApuesta">36</button>
+                    </td>
+                    <td class="green">
+                        <button id="btn_3_3" class="green botonApuesta">3/3</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black">
+                        <button id="btn2" class="black botonApuesta">2<br></button>
+                    </td>
+                    <td class="black">
+                        <button id="btn5" class="red botonApuesta">5</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn8" class="black botonApuesta">8</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn11" class="black botonApuesta">11</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn14" class="red botonApuesta">14</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn17" class="black botonApuesta">17</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn20" class="black botonApuesta">20</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn23" class="red botonApuesta">23</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn26" class="black botonApuesta">26</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn29" class="black botonApuesta">29</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn32" class="red botonApuesta">32</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn35" class="black botonApuesta">35</button>
+                    </td>
+                    <td class="green">
+                        <button id="btn_2_3" class="green botonApuesta">2/3</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="black">
+                        <button id="btn1" class="red botonApuesta">1<br></button>
+                    </td>
+                    <td class="black">
+                        <button id="btn4" class="black botonApuesta">4</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn7" class="red botonApuesta">7</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn10" class="black botonApuesta">10</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn13" class="black botonApuesta">13</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn16" class="red botonApuesta">16</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn19" class="red botonApuesta">19</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn22" class="black botonApuesta">22</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn25" class="red botonApuesta">25</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn28" class="black botonApuesta">28</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn31" class="black botonApuesta">31</button>
+                    </td>
+                    <td class="black">
+                        <button id="btn34" class="red botonApuesta">34</button>
+                    </td>
+                    <td class="green">
+                        <button id="btn_1_3" class="green botonApuesta">1/3</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td rowspan="2" style="background-color: rgb(0, 51, 0); border: 0px;"></td>
+                    <td colspan="4">
+                        <button id="btn_1_12" class="green botonApuesta">1 - 12</button>
+                    </td>
+                    <td colspan="4">
+                        <button id="btn_13_24" class="green botonApuesta">13 - 24</button>
+                    </td>
+                    <td colspan="4">
+                        <button id="btn_25_36" class="green botonApuesta">25 - 36</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="btn1_18" class="green botonApuesta">1 - 18</button>
+                    </td>
+                    <td colspan="2">
+                        <button id="btnPar" class="green botonApuesta">PAR</button>
+                    </td>
+                    <td colspan="2" class="red">
+                        <button id="btnCeldasRojas" class="red botonApuesta">&diams;</button>
+                    </td>
+                    <td colspan="2" class="red">
+                        <button id="btnCeldasNegras" class="black botonApuesta">&spades;</button>
+                    </td>
+                    <td colspan="2">
+                        <button id="btnImpar" class="green botonApuesta">IMPAR</button>
+                    </td>
+                    <td colspan="2">
+                        <button id="btn19_36" class="green botonApuesta">19 - 36</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="resultados">
+            <h1>RESULTADO:</h1>
+            <h1 id="resultado">
+
+            </h1>
+            <div id="resultadosAnteriores">
+                <h3>RESULTADOS ANTERIORES:</h3>
+                <table class="tablaResultadosAnteriores">
+                    <tr></tr>
+                </table>
+            </div>
+
+        </div>
+        <div class="perfilJugador">
+            <!--RESULTADO FICHAS JUGADOR-->
+            <h1>Fichas:</h1>
+            <h1 id="fichas"></h1>
+        </div>
+        <div class="botonesPrincipales">
+            <button id="jugar" class="botonJugar">Jugar</button>
+            <button id="salir" class="botonSalir">Salir</button>
+        </div>
+    </div>
+
+    <!-- Importar el script JavaScript -->
+    <script src="js/ruleta.js"></script>
+    <script src="js/textosAnuncios.js"></script>
+</body>
+
+</html>
