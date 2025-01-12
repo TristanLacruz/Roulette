@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonConfirmarInicioSesion = document.getElementById("btn_ComprobarInicioSesion");
     botonConfirmarInicioSesion.addEventListener('click', confirmarInicioSesion);
 
+    const botonMusica = document.getElementById("btn_EncenderMusica");
+    const audioMusica = document.getElementById("audioMusica");
 
     // Variable de estado
     let inicioSesion = false;
@@ -79,6 +81,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function iniciarSesion() {
         // Mostrar el modal de inicio de sesión
         divIniciarSesion.classList.remove('hidden');
+    }
+
+    function encenderMusica() {
+        if (audioMusica.paused) {
+            audioMusica.volume = 0.5;
+            audioMusica.play(); // Reproducir música
+            botonMusica.textContent = "Pausar música"; // Cambiar texto del botón
+        } else {
+            audioMusica.pause(); // Pausar música
+            botonMusica.textContent = "Encender música"; // Cambiar texto del botón
+        }
     }
 
     // Confirmar inicio de sesión (listener separado)
@@ -180,4 +193,5 @@ document.addEventListener('DOMContentLoaded', () => {
     botonIniciarSesion.addEventListener('click', iniciarSesion);
     botonRegistrarse.addEventListener('click', registrarse);
     botonCerrarSesion.addEventListener('click', cerrarSesion);
+    botonMusica.addEventListener("click", encenderMusica);
 });

@@ -175,6 +175,12 @@ footer {
     transform: translate(-50%, -50%);
 }
 
+.boton-superior-izquierdo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 /* Botón inferior derecho */
 .boton-inferior-derecho {
     position: absolute;

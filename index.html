@@ -14,14 +14,14 @@
 <body>
     <!-- PÁGINA DE INICIO -->
     <div id="pestanyaInicio">
-        
+
         <!-- BOTONES SUPERIORES -->
         <div class="botones-superiores">
             <button id="btn_IniciarSesion" class="botonesInicio botonIniciarSesion">Iniciar sesión</button>
             <button id="btn_Registrarse" class="botonesInicio botonRegistro">Registrarse</button>
             <button id="btn_CerrarSesion" class="botonesInicio botonCerrarSesion hidden">Cerrar sesión</button>
         </div>
-        
+
         <!-- BOTÓN CENTRAL -->
         <div class="boton-central">
             <div id="nombreBienvenido"></div>
@@ -30,12 +30,19 @@
 
         <!-- BOTÓN INFERIOR DERECHO -->
         <div class="boton-inferior-derecho">
-            <button id="encenderMusica" class="botonesInicio botonencenderMusica">Encender música</button>
+            <button id="btn_EncenderMusica" class="botonesInicio botonencenderMusica">Encender música</button>
+            <audio id="audioMusica" src="casinoTheme.mp3" loop></audio>
         </div>
+
+        <!--
+        <div class="boton-superior-izquierdo">
+            <button id="btn_ComprarCreditos" class="botonesInicio botonencenderMusica">Comprar créditos</button>
+        </div>
+        -->
     </div>
 
     <!-- MODALES -->
-    
+
     <!-- INICIAR SESIÓN -->
     <div class="modal hidden" id="divIniciarSesion">
         <div class="modal-content">
@@ -51,7 +58,8 @@
                 <input id="textPassword" type="password" class="form-control" placeholder="********" />
             </div>
             <div class="botones-modal">
-                <button id="btn_ComprobarInicioSesion" class="btn btn-large btn-positive pull-center">Iniciar sesión</button>
+                <button id="btn_ComprobarInicioSesion" class="btn btn-large btn-positive pull-center">Iniciar
+                    sesión</button>
                 <button id="closeSesionModalBtn" class="btn btn-large btn-negative pull-center">Cerrar</button>
             </div>
         </div>
@@ -81,6 +89,41 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal de Pago -->
+    <div class="modal hidden" id="modalPago">
+        <div class="modal-content">
+            <div class="titulo-modal">
+                <h2>Introduzca los datos de su tarjeta:</h2>
+            </div>
+            <form id="formPago">
+                <div class="form-group">
+                    <label for="nombreTarjeta">Nombre y apellidos</label>
+                    <input id="nombreTarjeta" type="text" class="form-control" placeholder="ej: Tristán Lacruz Martínez"
+                        required />
+                </div>
+                <div class="form-group">
+                    <label for="numeroTarjeta">Número de tarjeta</label>
+                    <input id="numeroTarjeta" type="text" class="form-control" placeholder="ej: 4000 0012 3456 7899"
+                        required />
+                </div>
+                <div class="form-group">
+                    <label for="fechaExpiracion">Fecha de expiración</label>
+                    <input id="fechaExpiracion" type="text" class="form-control" placeholder="MM/YY" required />
+                </div>
+                <div class="form-group">
+                    <label for="codigoSeguridad">Código de seguridad (CVV)</label>
+                    <input id="codigoSeguridad" type="password" class="form-control" placeholder="***" required />
+                </div>
+                <div class="botones-modal">
+                    <button type="submit" class="btn btn-large btn-positive">Pagar</button>
+                    <button type="button" id="cerrarModalPago" class="btn btn-large btn-negative">Cerrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <button id="abrirModalPago" class="btn btn-primary">Pagar con tarjeta</button>
+
 
     <!-- MODAL DE ERRORES -->
     <div class="modal hidden" id="errorModal">

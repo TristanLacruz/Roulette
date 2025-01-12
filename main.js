@@ -21,7 +21,7 @@ function createMainWindow() {
     });
     mainWindow.loadFile('index.html');
 
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -48,7 +48,7 @@ function createRuletaWindow() {
     });
     ruletaWindow.loadFile('ruleta.html');
 
-    ruletaWindow.webContents.openDevTools();
+    //ruletaWindow.webContents.openDevTools();
 
     
     ruletaWindow.on('closed', () => {

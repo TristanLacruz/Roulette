@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             boton.setAttribute('data-original-text', boton.textContent.trim());
         }
     });
+
 });
 
 /**
@@ -230,6 +231,7 @@ function inicializarBotones() {
  * Función asíncrona para los efectos visuales y el sonido
  */
 async function alternarColoresBotones() {
+    casinoTheme.play(); // Reproducir música
     const botones = document.querySelectorAll('.botonApuesta');
     const botonesCambiados = new Set();
 
@@ -252,8 +254,15 @@ async function alternarColoresBotones() {
         setTimeout(() => {
             clearInterval(intervalo);
             botonesCambiados.forEach(boton => boton.classList.remove("botonIluminado"));
-            resolve(); // Indica que la función ha terminado
-        }, 3000); // Detener después de 3 segundos
-        botonesCambiados.forEach(boton => boton.classList.add("botonIluminado"));
+
+            // Resuelve la promesa para indicar que el método ha terminado
+            resolve();
+
+            // Detener la música 1 segundo después de que termine el método
+            setTimeout(() => {
+                casinoTheme.pause();
+                casinoTheme.currentTime = 0; // Reinicia la música al inicio
+            }, 1000); // 1 segundo adicional
+        }, 5000); // Detener después de 5 segundos
     });
 }
