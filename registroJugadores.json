@@ -1,62 +1,14 @@
 [
-  {
-    "nombre": "Juan Pérez",
-    "dni": "12345678A",
-    "creditos": 1500
-  },
-  {
-    "nombre": "awefa",
-    "dni": "awdfa",
-    "password": "awfa"
-  },
-  {
-    "nombre": "1",
-    "dni": "1",
-    "password": "1"
-  },
-  {
-    "nombre": "Joa oashjoir aohjoa hjoi aeirho ia oiae oaieh oaieh wiaoeh",
-    "dni": "12",
-    "password": "12"
-  },
-  {
-    "nombre": "s",
-    "dni": "sd",
-    "password": "sd"
-  },
-  {
-    "nombre": "123",
-    "dni": "123",
-    "password": "123"
-  },
-  {
-    "nombre": "1234",
-    "dni": "1234",
-    "password": "1234"
-  },
-  {
-    "nombre": "12344",
-    "dni": "12344",
-    "password": "12344"
-  },
-  {
-    "nombre": "99",
-    "dni": "99",
-    "password": "99"
-  },
-  {
-    "nombre": "123444444",
-    "dni": "123444444",
-    "password": "12"
-  },
-  {
-    "nombre": "987",
-    "dni": "987",
-    "password": "987"
-  },
-  {
-    "nombre": "234",
-    "dni": "234",
-    "password": "234"
-  }
+    {
+        "nombre": "Lucia",
+        "dni": "11",
+        "password": "11",
+        "credits": 64
+    },
+    {
+        "nombre": "Tristan",
+        "dni": "1",
+        "password": "1",
+        "credits": 127
+    }
 ]

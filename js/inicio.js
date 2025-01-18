@@ -1,5 +1,9 @@
-const fs = require("fs");
 const { ipcRenderer } = require("electron");
+
+const fs = require("fs");
+const path = require('path');
+const rutaRegistro = path.join(__dirname, 'registroJugadores.json');
+
 
 // Leer datos iniciales de los usuarios desde el archivo JSON
 let fichero = fs.readFileSync('./registroJugadores.json');
@@ -34,6 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const botonConfirmarInicioSesion = document.getElementById("btn_ComprobarInicioSesion");
     botonConfirmarInicioSesion.addEventListener('click', confirmarInicioSesion);
 
+    const botonMusica = document.getElementById("btn_EncenderMusica");
+    const audioMusica = document.getElementById("audioMusica");
 
     // Variable de estado
     let inicioSesion = false;
@@ -45,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Iniciar el juego
     function iniciarJuego() {
         if (inicioSesion) {
+            //
             ipcRenderer.send('abrirJuego');
         } else {
             showErrorModal("Por favor, inicie sesión o regístrese antes de entrar.");
@@ -81,6 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         divIniciarSesion.classList.remove('hidden');
     }
 
+    function encenderMusica() {
+        if (audioMusica.paused) {
+            audioMusica.volume = 0.5;
+            audioMusica.play(); // Reproducir música
+            botonMusica.textContent = "Pausar música"; // Cambiar texto del botón
+        } else {
+            audioMusica.pause(); // Pausar música
+            botonMusica.textContent = "Encender música"; // Cambiar texto del botón
+        }
+    }
+
     // Confirmar inicio de sesión (listener separado)
     function confirmarInicioSesion() {
         const dniInput = document.getElementById("textDni");
@@ -104,10 +122,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Iniciar sesión exitosamente
         inicioSesion = true;
+
         nombreBienvenido.textContent = `Bienvenido, ${usuarioEncontrado.nombre}`;
-        divIniciarSesion.classList.add('hidden');
+        actualizarPosicionJugador(dni);
+        
 
         // Alternar botones
+        divIniciarSesion.classList.add('hidden');
         botonIniciarSesion.classList.add('hidden');
         botonRegistrarse.classList.add("hidden");
         botonCerrarSesion.classList.remove('hidden');
@@ -117,6 +138,32 @@ document.addEventListener('DOMContentLoaded', () => {
         passwordInput.value = '';
     }
 
+    function actualizarPosicionJugador(dni) {
+        try {
+            // Leer el archivo JSON
+            let datos = JSON.parse(fs.readFileSync(rutaRegistro, 'utf-8'));
+            
+            // Buscar el índice del jugador
+            const indiceJugador = datos.findIndex(jugador => jugador.dni === dni);
+            if (indiceJugador === -1) {
+                console.error(`Jugador con DNI ${dni} no encontrado.`);
+                return;
+            }
+    
+            // Extraer la información del jugador y eliminarlo del array
+            const jugador = datos.splice(indiceJugador, 1)[0];
+            
+            // Agregar al final
+            datos.push(jugador);
+            
+            // Escribir los datos actualizados en el archivo
+            fs.writeFileSync(rutaRegistro, JSON.stringify(datos, null, 4));
+            console.log(`Jugador ${jugador.nombre} movido al final del registro.`);
+        } catch (error) {
+            console.error('Error al actualizar el registro:', error);
+        }
+    }
+    
     // Confirmar registro
     const botonConfirmarRegistro = document.getElementById("btn_ComprobarRegistro");
     botonConfirmarRegistro.addEventListener('click', () => {
@@ -127,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nombre = nombreInput.value.trim();
         const dni = dniInput.value.trim();
         const password = passwordInput.value.trim();
+        const credits = 100;
 
         // Validar campos vacíos
         if (!nombre || !dni || !password) {
@@ -141,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Crear nuevo usuario
-        const nuevoUsuario = { nombre, dni, password };
+        const nuevoUsuario = { nombre, dni, password, credits };
         usuarios.push(nuevoUsuario);
 
         // Guardar en el archivo JSON
@@ -180,4 +228,5 @@ document.addEventListener('DOMContentLoaded', () => {
     botonIniciarSesion.addEventListener('click', iniciarSesion);
     botonRegistrarse.addEventListener('click', registrarse);
     botonCerrarSesion.addEventListener('click', cerrarSesion);
+    botonMusica.addEventListener("click", encenderMusica);
 });

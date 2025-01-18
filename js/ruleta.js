@@ -1,21 +1,49 @@
 // Módulos requeridos
-const fs = require("fs");
 const { ipcRenderer } = require("electron");
+const fs = require("fs");
 
 // Variables globales
-let fichasDisponibles = 100; // Fichas iniciales del jugador
+let usuarios;
+let fichasDisponibles;
 let numerosApuesta = []; // Arreglo para almacenar las apuestas realizadas
 
-// Inicialización de la aplicación
-inicializarBotones(); // Asigna eventos a los botones
-actualizarFichasDisponibles(); // Actualiza la visualización inicial de las fichas
 
+// Función para cargar usuarios y actualizar fichas del último jugador
+function cargarUsuariosYFichas() {
+    try {
+        usuarios = JSON.parse(fs.readFileSync('registroJugadores.json', 'utf-8'));
+        fichasDisponibles = usuarios[usuarios.length - 1].credits;
+        console.log(`Jugador actual: ${usuarios[usuarios.length - 1].nombre}, Créditos: ${fichasDisponibles}`);
+    } catch (error) {
+        console.error('Error al cargar usuarios y fichas:', error);
+    }
+}
+
+console.log('Inicio de ruleta.js');
 document.addEventListener('DOMContentLoaded', () => {
+    console.log(`Cargando créditos del último jugador: ${fichasDisponibles}`);
+    cargarUsuariosYFichas();
+    inicializarBotones();
     actualizarFichasDisponibles();
 
     // Asignar eventos a los botones principales
     document.getElementById('jugar').addEventListener('click', jugarRuleta);
     document.getElementById('salir').addEventListener('click', salirJuego);
+    
+    
+    //Funcionalidad para hacer que toda la interfaz se ponga a temblar si ponemos el cursos encima del botón "Salir"
+    const pestañaContenido = document.getElementById("pestanyaContenido");
+    salir.addEventListener('mouseenter', () => {
+        pestañaContenido.classList.add('shake');
+    });
+    
+    salir.addEventListener('mouseleave', () => {
+        pestañaContenido.classList.remove('shake');
+    });
+
+
+
+
 
     // Guardar el texto original de los botones de apuesta
     const botones = document.querySelectorAll('.botonApuesta');
@@ -24,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             boton.setAttribute('data-original-text', boton.textContent.trim());
         }
     });
+
 });
 
 /**
@@ -31,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
  * Reinicia las variables globales y la interfaz gráfica al salir del juego.
  */
 function salirJuego() {
-    fichasDisponibles = 100; // Reinicia las fichas disponibles
     numerosApuesta = []; // Limpia las apuestas
 
     const botonesApuesta = document.querySelectorAll('.botonApuesta');
@@ -41,7 +69,15 @@ function salirJuego() {
         if (textoOriginal) boton.textContent = textoOriginal; // Restaura el texto original
     });
 
-    actualizarFichasDisponibles();
+    try {
+        // Actualizar los créditos del jugador en el JSON
+        let datos = JSON.parse(fs.readFileSync('registroJugadores.json', 'utf-8'));
+        datos[datos.length - 1].credits = fichasDisponibles;
+        fs.writeFileSync('registroJugadores.json', JSON.stringify(datos, null, 4));
+        console.log('Créditos guardados correctamente.');
+    } catch (error) {
+        console.error('Error al guardar créditos:', error);
+    }
     ipcRenderer.send('salirJuego'); // Notifica al proceso principal que el juego terminó
 }
 
@@ -230,6 +266,7 @@ function inicializarBotones() {
  * Función asíncrona para los efectos visuales y el sonido
  */
 async function alternarColoresBotones() {
+    casinoTheme.play(); // Reproducir música
     const botones = document.querySelectorAll('.botonApuesta');
     const botonesCambiados = new Set();
 
@@ -252,8 +289,15 @@ async function alternarColoresBotones() {
         setTimeout(() => {
             clearInterval(intervalo);
             botonesCambiados.forEach(boton => boton.classList.remove("botonIluminado"));
-            resolve(); // Indica que la función ha terminado
-        }, 3000); // Detener después de 3 segundos
-        botonesCambiados.forEach(boton => boton.classList.add("botonIluminado"));
+
+            // Resuelve la promesa para indicar que el método ha terminado
+            resolve();
+
+            // Detener la música 1 segundo después de que termine el método
+            setTimeout(() => {
+                casinoTheme.pause();
+                casinoTheme.currentTime = 0; // Reinicia la música al inicio
+            }, 1000); // 1 segundo adicional
+        }, 5000); // Detener después de 5 segundos
     });
 }

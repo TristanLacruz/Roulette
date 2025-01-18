@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/estilos.css">
-
+    <audio id="casinoTheme" src="rouletteSound.mp3" loop></audio>
 </head>
 
 <body>
@@ -15,7 +15,7 @@
             <div class="moving-text" id="text-container"></div>
         </div>
         <br>
-        
+
         <div class="todo">
             <table class="tablero">
                 <tr>
@@ -199,6 +199,31 @@
         <div class="botonesPrincipales">
             <button id="jugar" class="botonJugar">Jugar</button>
             <button id="salir" class="botonSalir">Salir</button>
+        </div>
+    </div>
+
+    <!-- REGISTRARSE -->
+    <div class="modal hidden" id="divRegistrarse">
+        <div class="modal-content">
+            <div class="titulo-modal">
+                Introduzca sus datos personales:
+            </div>
+            <div class="form-group">
+                <span>Nombre</span>
+                <input id="textNombreRegistro" type="text" class="form-control" placeholder="ej: Tristán Lacruz" />
+            </div>
+            <div class="form-group">
+                <span>DNI</span>
+                <input id="textDniRegistro" type="text" class="form-control" placeholder="ej: 446778132G" />
+            </div>
+            <div class="form-group">
+                <span>Contraseña</span>
+                <input id="textPasswordRegistro" type="password" class="form-control" placeholder="********" />
+            </div>
+            <div class="botones-modal">
+                <button id="btn_ComprobarRegistro" class="btn btn-large btn-positive pull-center">Registrarse</button>
+                <button id="closeRegistroModal" class="btn btn-large btn-negative pull-center">Cerrar</button>
+            </div>
         </div>
     </div>
 

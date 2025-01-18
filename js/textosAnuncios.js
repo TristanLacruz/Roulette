@@ -1,5 +1,5 @@
 
-// Lista de 10 textos
+// Lista de los textos que aparecerán
 const texts = [
     "No necesitas esperanza, solo necesitas jugar y ganar",
     "¿Vas a dejar que la suerte de tu familia se escape de tus manos?",
@@ -17,7 +17,7 @@ let index = 0;
 // Función para actualizar el texto con animación
 function updateText() {
     textContainer.style.animation = "none"; // Reinicia la animación
-    textContainer.offsetHeight; // Fuerza el reflow para reiniciar la animación
+    textContainer.offsetHeight; 
     textContainer.textContent = texts[index]; // Actualiza el texto
     index = (index + 1) % texts.length; // Ciclo infinito
     textContainer.style.animation = "slideText 15s linear"; // Reactiva la animación

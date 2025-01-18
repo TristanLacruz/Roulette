@@ -21,7 +21,7 @@ function createMainWindow() {
     });
     mainWindow.loadFile('index.html');
 
-    mainWindow.webContents.openDevTools();
+    //mainWindow.webContents.openDevTools();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -48,14 +48,13 @@ function createRuletaWindow() {
     });
     ruletaWindow.loadFile('ruleta.html');
 
-    ruletaWindow.webContents.openDevTools();
+    //ruletaWindow.webContents.openDevTools();
 
-    
+
     ruletaWindow.on('closed', () => {
         ruletaWindow = null;
     });
 }
-
 
 
 // Comunicación entre ventanas
@@ -73,7 +72,7 @@ ipcMain.on('abrirJuego', (event) => {
 
 ipcMain.on('salirJuego', () => {
     if (ruletaWindow) {
-        ruletaWindow.hide(); // Oculta la ventana de la ruleta
+        ruletaWindow.close(); // Oculta la ventana de la ruleta
     }
     if (mainWindow) {
         mainWindow.show(); // Muestra la ventana principal si ya existe
